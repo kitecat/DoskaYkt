@@ -15,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_post_layout">
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item_post_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
