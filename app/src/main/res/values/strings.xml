@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DoskaYkt</string>
+    <string name="title_home">Главная</string>
+    <string name="title_favourites">Избранное</string>
+    <string name="title_add">Добавить</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="title_profile">Профиль</string>
+</resources>

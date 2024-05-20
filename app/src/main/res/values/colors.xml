@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="thunderbird">#FFB4271D</color>
+<!--    primary: Color(0xffe84c3d),-->
+<!--    primaryContainer: Color(0xffd0e4ff),-->
+<!--    secondary: Color(0xffac3306),-->
+<!--    secondaryContainer: Color(0xffffdbcf),-->
+<!--    tertiary: Color(0xff006875),-->
+<!--    tertiaryContainer: Color(0xff95f0ff),-->
+<!--    appBarColor: Color(0xffffdbcf),-->
+<!--    error: Color(0xffb00020),-->
+</resources>
