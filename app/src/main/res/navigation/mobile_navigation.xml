@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_favourites"
+        android:id="@+id/navigation_favorites"
         android:name="com.aital.doskaykt.ui.home.HomeFragment"
         android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_add"
@@ -34,4 +34,5 @@
         android:name="com.aital.doskaykt.ui.home.HomeFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_home" />
+
 </navigation>

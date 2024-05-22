@@ -1,4 +1,4 @@
-package com.aital.doskaykt
+package com.aital.doskaykt.models
 
 data class Post(
     val bgColor: String,
@@ -32,4 +32,4 @@ data class Post(
     val titleView: String,
     val video: List<Any>,
     val views: Int
-)
+):java.io.Serializable

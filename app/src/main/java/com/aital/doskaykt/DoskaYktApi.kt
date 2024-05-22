@@ -1,5 +1,6 @@
 package com.aital.doskaykt
 
+import com.aital.doskaykt.models.Posts
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

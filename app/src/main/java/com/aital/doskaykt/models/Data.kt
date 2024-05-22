@@ -1,4 +1,4 @@
-package com.aital.doskaykt
+package com.aital.doskaykt.models
 
 data class Data(
     val categories: List<Category>,

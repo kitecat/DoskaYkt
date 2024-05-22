@@ -4,10 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aital.doskaykt.databinding.ItemPostLayoutBinding
+import com.aital.doskaykt.models.Post
 import com.bumptech.glide.Glide
 
 class PostsAdapter : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+
     private var postsList = ArrayList<Post>()
+    private var onClickListener: OnClickListener? = null
+
     fun setPostsList(postsList: List<Post>) {
         this.postsList = postsList as ArrayList<Post>
         notifyDataSetChanged()
@@ -26,13 +30,29 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = postsList[position]
         Glide.with(holder.itemView)
-            .load(postsList[position].picsUrl[0].url)
+            .load(item.picsUrl[0].url)
             .into(holder.binding.postPic)
-        holder.binding.postTitle.text = postsList[position].title
+        holder.binding.postTitle.text = item.title
+        holder.binding.postPrice.text = item.price
+        holder.binding.postDate.text = item.publicDate
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, item )
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return postsList.size
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    interface OnClickListener {
+        fun onClick(position: Int, model: Post)
     }
 }

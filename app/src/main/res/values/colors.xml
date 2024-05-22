@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#FF00CF5F</color>
+    <color name="gray">#FF707070</color>
 
 <!--    primary: Color(0xffe84c3d),-->
 <!--    primaryContainer: Color(0xffd0e4ff),-->

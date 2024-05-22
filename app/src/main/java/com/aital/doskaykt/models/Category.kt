@@ -1,4 +1,4 @@
-package com.aital.doskaykt
+package com.aital.doskaykt.models
 
 data class Category(
     val count: Int,
