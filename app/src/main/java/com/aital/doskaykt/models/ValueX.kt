@@ -1,9 +1,9 @@
 package com.aital.doskaykt.models
 
-data class Category(
-    val count: Int,
+data class ValueX(
+    val activeCount: Int,
     val id: Int,
     val isPriority: Boolean,
     val name: String,
-    val subcategories: List<Subcategory>?
+    val subOptions: List<Any>
 ):java.io.Serializable

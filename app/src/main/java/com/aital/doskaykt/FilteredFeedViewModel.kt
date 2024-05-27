@@ -1,0 +1,33 @@
+package com.aital.doskaykt
+
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.aital.doskaykt.models.Post
+import com.aital.doskaykt.models.Posts
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class FilteredFeedViewModel : ViewModel() {
+    private var postsLiveData = MutableLiveData<List<Post>>()
+    fun getFilteredFeed(categoryId: Int, subcategoryId: Int, rubricId: Int) {
+        RetrofitInstance.api.getFeed(categoryId.toString(), subcategoryId.toString(), rubricId.toString()).enqueue(object  : Callback<Posts> {
+            override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
+                if (response.body()!=null){
+                    postsLiveData.value = response.body()!!.data.posts
+                }
+                else{
+                    return
+                }
+            }
+            override fun onFailure(call: Call<Posts>, t: Throwable) {
+                Log.d("TAG",t.message.toString())
+            }
+        })
+    }
+    fun observePostsLiveData() : LiveData<List<Post>> {
+        return postsLiveData
+    }
+}

@@ -28,6 +28,22 @@
             android:name=".ui.PostActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.CategoriesActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.SubcategoriesActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.RubricsActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.FilteredFeedActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

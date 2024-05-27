@@ -1,9 +1,9 @@
 package com.aital.doskaykt.models
 
-data class Category(
+data class Rubric(
     val count: Int,
     val id: Int,
     val isPriority: Boolean,
-    val name: String,
-    val subcategories: List<Subcategory>?
+    val isShowMap: Boolean,
+    val name: String
 ):java.io.Serializable

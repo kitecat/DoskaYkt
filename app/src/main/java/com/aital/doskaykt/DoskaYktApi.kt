@@ -1,5 +1,6 @@
 package com.aital.doskaykt
 
+import com.aital.doskaykt.models.CategoriesSimpleResponse
 import com.aital.doskaykt.models.Posts
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,4 +13,9 @@ interface DoskaYktApi {
         @Query("sid") sid : String, // подкатегория
         @Query("rid") rid : String // рубрика
     ) : Call<Posts>
+
+    @GET("categories?")
+    fun getCategories(
+        @Query("scope") scope : String,
+    ) : Call<CategoriesSimpleResponse>
 }

@@ -14,6 +14,7 @@ import com.aital.doskaykt.PostsAdapter
 import com.aital.doskaykt.PostsViewModel
 import com.aital.doskaykt.databinding.FragmentHomeBinding
 import com.aital.doskaykt.models.Post
+import com.aital.doskaykt.ui.CategoriesActivity
 import com.aital.doskaykt.ui.PostActivity
 
 class HomeFragment : Fragment() {
@@ -41,6 +42,12 @@ class HomeFragment : Fragment() {
         viewModel.observePostsLiveData().observe(viewLifecycleOwner, Observer { postsList ->
             postsAdapter.setPostsList(postsList)
         })
+
+        binding.btnCategories.setOnClickListener {
+            val intent = Intent(context, CategoriesActivity::class.java)
+//            intent.putExtra("post_data", model)
+            startActivity(intent)
+        }
         return root
     }
 
@@ -56,8 +63,6 @@ class HomeFragment : Fragment() {
             PostsAdapter.OnClickListener {
             override fun onClick(position: Int, model: Post) {
                 val intent = Intent(context, PostActivity::class.java)
-                // Passing the data to the
-                // EmployeeDetails Activity
                 intent.putExtra("post_data", model)
                 startActivity(intent)
             }
