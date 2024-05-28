@@ -2,6 +2,7 @@ package com.aital.doskaykt.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +25,13 @@ class CategoriesActivity : AppCompatActivity() {
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var category: Category? = null
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // показ объявлений без фильтра
+        binding.tvAllCategories.setOnClickListener {
+            startActivity(Intent(baseContext, FilteredFeedActivity::class.java))
+        }
 
         prepareRecyclerView()
         viewModel = ViewModelProvider(this)[CategoriesViewModel::class.java]
@@ -49,16 +56,17 @@ class CategoriesActivity : AppCompatActivity() {
                     if (model.subcategories.isNotEmpty()) {
                         val intent = Intent(baseContext, SubcategoriesActivity::class.java)
                         intent.putExtra("category", model)
-                        intent.putExtra("categoryId", model.id)
                         startActivity(intent)
                     }
                 }
-//                val intent = Intent(context, PostActivity::class.java)
-//                // Passing the data to the
-//                // EmployeeDetails Activity
-//                intent.putExtra("post_data", model)
-//                startActivity(intent)
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            this.finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -2,6 +2,7 @@ package com.aital.doskaykt.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,8 @@ import com.aital.doskaykt.PostsAdapter
 import com.aital.doskaykt.databinding.ActivityFilteredFeedBinding
 import com.aital.doskaykt.models.Category
 import com.aital.doskaykt.models.Post
+import com.aital.doskaykt.models.Rubric
+import com.aital.doskaykt.models.Subcategory
 
 class FilteredFeedActivity : AppCompatActivity() {
 
@@ -19,9 +22,9 @@ class FilteredFeedActivity : AppCompatActivity() {
     private lateinit var viewModel: FilteredFeedViewModel
     private lateinit var postsAdapter : PostsAdapter
 
-    private var categoryId = -1
-    private var subcategoryId = -1
-    private var rubricId = -1
+    private var category: Category? = null
+    private var subcategory: Subcategory? = null
+    private var rubric: Rubric? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +32,26 @@ class FilteredFeedActivity : AppCompatActivity() {
         binding = ActivityFilteredFeedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        categoryId = intent.getIntExtra("categoryId", -1)
-        subcategoryId = intent.getIntExtra("subcategoryId", -1)
-        rubricId = intent.getIntExtra("rubricId", -1)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        if (intent.hasExtra("category")) {
+            category = intent.getSerializableExtra("category") as Category
+        }
+
+        if (intent.hasExtra("subcategory")) {
+            subcategory = intent.getSerializableExtra("subcategory") as Subcategory
+        }
+
+        if (intent.hasExtra("rubric")) {
+            rubric = intent.getSerializableExtra("rubric") as Rubric
+        }
+
+        buildFilterText()
 
         prepareRecyclerView()
         viewModel = ViewModelProvider(this)[FilteredFeedViewModel::class.java]
-        println(categoryId)
-        println(subcategoryId)
-        println(rubricId)
-        viewModel.getFilteredFeed(categoryId, subcategoryId, rubricId)
+        viewModel.getFilteredFeed(category?.id, subcategory?.id, rubric?.id)
         viewModel.observePostsLiveData().observe(this, Observer { postsList ->
             postsAdapter.setPostsList(postsList)
         })
@@ -60,5 +73,32 @@ class FilteredFeedActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+    }
+
+    private fun buildFilterText() {
+        if (category != null) {
+            binding.tvCategoryName.text = category!!.name
+        } else {
+            binding.tvCategoryName.text = "Все категории"
+        }
+
+        if (subcategory != null) {
+            binding.tvSubcategoryName.text = subcategory!!.name
+        } else {
+            binding.tvSubcategoryName.text = "Все подкатегории"
+        }
+
+        if (rubric != null) {
+            binding.tvRubricName.text = rubric!!.name
+        } else {
+            binding.tvRubricName.text = "Все рубрики"
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            this.finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

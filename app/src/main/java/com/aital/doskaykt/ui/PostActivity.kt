@@ -1,6 +1,7 @@
 package com.aital.doskaykt.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.aital.doskaykt.databinding.ActivityPostBinding
 import com.aital.doskaykt.models.Post
@@ -16,6 +17,9 @@ class PostActivity : AppCompatActivity() {
 
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         var post: Post? = null
 
@@ -34,5 +38,12 @@ class PostActivity : AppCompatActivity() {
             binding.postFavs.text = post.favorites.toString()
             binding.postViews.text = post.views.toString()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            this.finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -2,6 +2,7 @@ package com.aital.doskaykt.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aital.doskaykt.SubcategoriesAdapter
@@ -21,10 +22,22 @@ class SubcategoriesActivity : AppCompatActivity() {
         binding = ActivitySubcategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         var category: Category? = null
 
         if (intent.hasExtra("category")) {
             category = intent.getSerializableExtra("category") as Category
+        }
+
+        // показ всех объявлений определенной категории
+        binding.tvAllSubcategories.setOnClickListener {
+            val intent = Intent(baseContext, FilteredFeedActivity::class.java)
+            if (category != null) {
+                intent.putExtra("category", category)
+            }
+            startActivity(intent)
         }
 
         if (category != null) {
@@ -43,7 +56,7 @@ class SubcategoriesActivity : AppCompatActivity() {
                     if (model.rubrics.isNotEmpty()) {
                         val intent = Intent(baseContext, RubricsActivity::class.java)
                         if (category != null) {
-                            intent.putExtra("categoryId", category.id)
+                            intent.putExtra("category", category)
                         }
                         intent.putExtra("subcategory", model)
                         startActivity(intent)
@@ -51,5 +64,12 @@ class SubcategoriesActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            this.finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

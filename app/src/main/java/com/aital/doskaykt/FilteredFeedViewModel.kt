@@ -12,8 +12,11 @@ import retrofit2.Response
 
 class FilteredFeedViewModel : ViewModel() {
     private var postsLiveData = MutableLiveData<List<Post>>()
-    fun getFilteredFeed(categoryId: Int, subcategoryId: Int, rubricId: Int) {
-        RetrofitInstance.api.getFeed(categoryId.toString(), subcategoryId.toString(), rubricId.toString()).enqueue(object  : Callback<Posts> {
+    fun getFilteredFeed(categoryId: Int?, subcategoryId: Int?, rubricId: Int?) {
+        var categoryIdString = categoryId?.toString() ?: ""
+        var subcategoryIdString = subcategoryId?.toString() ?: ""
+        var rubricIdString = rubricId?.toString() ?: ""
+        RetrofitInstance.api.getFeed(categoryIdString, subcategoryIdString, rubricIdString).enqueue(object  : Callback<Posts> {
             override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
                 if (response.body()!=null){
                     postsLiveData.value = response.body()!!.data.posts
